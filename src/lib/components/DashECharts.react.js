@@ -94,7 +94,23 @@ function DashECharts(props)  {
             const oDOM = oParser.parseFromString(value.svg, "image/svg+xml");
             value.svg = oDOM;
         }
-        echarts.registerMap(key, value);
+        echarts.registerMap(key, value, specialAreas={
+            Alaska: {
+              left: -131,
+              top: 25,
+              width: 15
+            },
+            Hawaii: {
+              left: -110,
+              top: 28,
+              width: 5
+            },
+            'Puerto Rico': {
+              left: -76,
+              top: 26,
+              width: 2
+            }
+          });
     })
 
 
