@@ -7,6 +7,8 @@ import * as ecStat from 'echarts-stat';
 import bmap from 'echarts/extension/bmap/bmap';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 const loadFuns = (obj) => {
@@ -244,8 +246,34 @@ function DashECharts(props)  {
         }
     }, [reset_id])
 
+    const downloadChartAsPDF = async () => {
+        if (!chartRef.current) return;
+        
+        const canvas = await html2canvas(chartRef.current);
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('landscape');
+        pdf.addImage(imgData, 'PNG', 10, 10, 280, 150);
+        pdf.save('chart.pdf');
+    };
+
     return (
-        <div id={id} style={style} ref={chartRef}/>
+        <div>
+            <button onClick={downloadChartAsPDF} style={{
+                position: 'absolute',
+                right: '5px',
+                backgroundColor: 'rgba(0,0,0,0.1)',
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                borderRadius: '5px',
+                border: 'none',
+                padding: '10px',
+                marginBottom: '10px',
+                zIndex: 99 
+                }}>
+                &#11123;
+            </button>
+            <div id={id} style={style} ref={chartRef}/>
+        </div>
     );
 }
 
