@@ -259,15 +259,16 @@ function DashECharts(props)  {
     return (
         <div>
             <button onClick={downloadChartAsPDF} style={{
-                position: 'absolute',
-                right: '5px',
+                cursor: 'pointer',
+                position: 'relative',
+                float: 'right',
                 backgroundColor: 'rgba(0,0,0,0.1)',
                 fontSize: '1.2rem',
                 fontWeight: 'bold',
                 borderRadius: '5px',
                 border: 'none',
-                padding: '10px',
-                marginBottom: '10px',
+                padding: '5px 10px 5px 10px',
+                margin: '10px',
                 zIndex: 99 
                 }}>
                 &#11123;
