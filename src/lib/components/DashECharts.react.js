@@ -32,12 +32,14 @@ function DashECharts(props)  {
         maps,
         funs, fun_keys, fun_values, fun_paths, fun_effects, fun_prepares,
         mapbox_token, bmap_token,
+        downloadPDF,
         resize_id,
         reset_id,
     } = props;
 
 
     // eslint-disable-next-line no-unused-vars
+    const [visibility, setVisibility] = useState('hidden');
     const [chart, setChart] = useState({});
     const chartRef = useRef(null)
 
@@ -246,6 +248,14 @@ function DashECharts(props)  {
         }
     }, [reset_id])
 
+    const handleOnMouseEnter = () => {
+        setVisibility('visible');
+    };
+
+    const handleOnMouseLeave = () => {
+        setVisibility('hidden');
+    };
+
     const downloadChartAsPDF = async () => {
         if (!chartRef.current) return;
         
@@ -257,8 +267,13 @@ function DashECharts(props)  {
     };
 
     return (
-        <div>
+        <div
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
+        >
+            {downloadPDF ? (
             <button onClick={downloadChartAsPDF} style={{
+                visibility: visibility,
                 cursor: 'pointer',
                 position: 'relative',
                 float: 'right',
@@ -268,11 +283,11 @@ function DashECharts(props)  {
                 borderRadius: '5px',
                 border: 'none',
                 padding: '5px 10px 5px 10px',
-                margin: '10px',
                 zIndex: 99 
                 }}>
                 &#11123;
             </button>
+            ) : null}
             <div id={id} style={style} ref={chartRef}/>
         </div>
     );
@@ -297,6 +312,7 @@ DashECharts.defaultProps = {
     funs: {},
     mapbox_token: null,
     bmap_token: null,
+    downloadPDF: true
 };
 
 DashECharts.propTypes = {
@@ -319,6 +335,7 @@ DashECharts.propTypes = {
     fun_prepares: PropTypes.array,
     mapbox_token: PropTypes.string,
     bmap_token: PropTypes.string,
+    downloadPDF: PropTypes.bool,
     /**
      * The ID used to identify this component in Dash callbacks.
      */

@@ -12,6 +12,7 @@ Keyword arguments:
 - `bmap_token` (String; optional)
 - `brush_data` (Dict; optional)
 - `click_data` (Dict; optional)
+- `downloadPDF` (Bool; optional)
 - `event` (Dict; optional)
 - `fun_effects` (Array; optional)
 - `fun_keys` (Array; optional)
@@ -30,7 +31,7 @@ Keyword arguments:
 - `style` (Dict; optional)
 """
 function ''_dashecharts(; kwargs...)
-        available_props = Symbol[:id, :bmap_token, :brush_data, :click_data, :event, :fun_effects, :fun_keys, :fun_paths, :fun_prepares, :fun_values, :funs, :mapbox_token, :maps, :n_clicks, :n_clicks_timestamp, :option, :reset_id, :resize_id, :selected_data, :style]
+        available_props = Symbol[:id, :bmap_token, :brush_data, :click_data, :downloadPDF, :event, :fun_effects, :fun_keys, :fun_paths, :fun_prepares, :fun_values, :funs, :mapbox_token, :maps, :n_clicks, :n_clicks_timestamp, :option, :reset_id, :resize_id, :selected_data, :style]
         wild_props = Symbol[]
         return Component("''_dashecharts", "DashECharts", "dash_echarts", available_props, wild_props; kwargs...)
 end
